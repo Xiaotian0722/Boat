@@ -267,7 +267,7 @@ function drawEndPage() {
     testButton.position(10, 10); // Position the Test button at the top left
     testButton.show();
     testButton.mousePressed(() => {
-        window.open('https://xiaotian0722.github.io/ANT-end/', '_blank'); // Open the test
+        window.location.href ='https://xiaotian0722.github.io/ANT-end/'; // Open the test
     });
 }
 
