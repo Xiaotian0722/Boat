@@ -9,7 +9,7 @@ let currentMessageIndex = -1;
 let friendSize = 100;
 let friendPositions = [
     { x: 200, y: 50 },
-    { x: 800, y: 400 },
+    { x: 800, y: 460 },
     { x: 1200, y: 200 }
 ];
 
@@ -118,7 +118,6 @@ function drawGamePage() {
     textSize(32);
     fill(255);
     stroke(208, 16, 76);
-    strokeWeight(4);
     text('End', width - 50, 200);
     image(boatImg, boatX, boatY, 40, 30);
     for (let i = 0; i < friends.length; i++) {
@@ -247,7 +246,7 @@ function drawFriendMessage() {
     imageMode(CENTER);
     let img = friendMessageImgs[currentMessageIndex];
     
-    image(img, width / 2, height / 2);
+    image(img, width / 2, height / 2, 1280, 720);
 
     closeButton.position(width - 70, 20);
     closeButton.show();
