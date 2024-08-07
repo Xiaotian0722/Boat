@@ -1,9 +1,10 @@
 let currentPage = 0;
-let input1, input2, nextButton, startButton, closeButton, testButton;
+let input1, input2, nextButton, startButton, closeButton, testButton, continueButton;
 let boatX, boatY, boatImg;
 let endImg;
 let friends = [];
 let friendImgs = [];
+let friendMessageImgs = [];
 let currentMessageIndex = -1;
 let friendSize = 100;
 let friendPositions = [
@@ -12,15 +13,17 @@ let friendPositions = [
     { x: 1200, y: 200 }
 ];
 
-let friendMessages = ["1. He was the one. \n\n2. When love knocks, you open the door.  \n\n3. Her eyes are beautiful.  \n\n4. I found that eating alone by the window in a quiet restaurant is one of life’s greatest secret pleasures. \n--《City of Girls》\n\n5. The ghostly winter silence had given way to the great spring murmur of awakening life.\n This murmur arose from all the land, fraught with the joy of living.\n--《The Call of the Wild》",                   "1. Siri, delete Mom from my contact.\n\n2. Finally spoke to him. Left flowers.\n\n3. Today I washed my mother’s hair for the first time. \n\n4. Do you want to visit grandma?\n\n5. Why do people have to be this lonely? What’s the point of it all? \nMillions of people in this world, all of them yearning, looking to others to satisfy them, \nyet isolating themselves. Why? \nWas the earth put here just to nourish human loneliness?\n--《Sputnik Sweetheart》",                                          "1. She looked at the blue sweater her master's daughters wore for the birthday party. \nHer master's daughter looked at the freedom her servant's daughter had. \n\n2. Three friends met after six years only to know how much wealth they acquired. \nTwo compared the cars and houses, but had no children; \nthird brought homemade cake baked by his daughter. \n\n 3. He saw a man walking free on the road from the prison ground. \nThe man on road wondered if he could go to jail to survive another homeless winter. \n\n4. 'What! My little book I was so fond of, and worked over, and meant to finish before Father got home? \nHave you really burned it?' said Jo, turning very pale, while her eyes kindled and her hands clutched Amy nervously. \n--《Little Women》"];
-
-
 function preload() {
     boatImg = loadImage('pic/boat.png');
     friendImgs.push(loadImage('pic/friend1.png'));
     friendImgs.push(loadImage('pic/friend2.png'));
     friendImgs.push(loadImage('pic/friend3.png'));
     endImg = loadImage('pic/over.png'); // Load the end image
+
+    
+    friendMessageImgs.push(loadImage('pic/m1.png'));
+    friendMessageImgs.push(loadImage('pic/m2.png'));
+    friendMessageImgs.push(loadImage('pic/m3.png'));
 }
 
 function setup() {
@@ -31,7 +34,8 @@ function setup() {
     nextButton = createButton('Next');
     startButton = createButton('Start');
     closeButton = createButton('Close');
-    testButton = createButton('Test'); // Create the Test button
+    testButton = createButton('Next');
+    continueButton = createButton('Continue');
 
     resetGame();
     
@@ -50,6 +54,8 @@ function draw() {
         drawFriendMessage();
     } else if (currentPage === 4) {
         drawEndPage(); // Draw the end page
+    } else if (currentPage === 5) {
+        drawThankYouPage(); // Draw the thank you page
     }
 }
 
@@ -59,6 +65,7 @@ function showMainPage() {
     startButton.hide();
     closeButton.hide();
     testButton.hide(); // Hide Test button on main page
+    continueButton.hide(); // Hide continue button on main page
     nextButton.position(width / 2 - 30, height - 100);
     nextButton.show();
     nextButton.mousePressed(() => {
@@ -70,7 +77,7 @@ function showMainPage() {
 function drawMainPage() {
     textAlign(CENTER, CENTER);
     textSize(24);
-    text("Now we just need to gather your friends to start the party🎉!\n\nUse the arrow keys to move the boat.\n\nFriends' icons will appear along the path.\n\nTry to reach the destination!", width / 2, height / 2);
+    text("Now we just need to gather your friends to start the party🎉!\n\nUse the arrow keys to move the boat.\n\nFriends will give you gifts when reaching them.\n\nTry to reach the destination!", width / 2, height / 2);
 }
 
 function showInputPage() {
@@ -100,9 +107,9 @@ function resetGame() {
     boatX = 0;
     boatY = 130; 
     friends = [
-        { x: friendPositions[0].x, y: friendPositions[0].y, collected: false, img: friendImgs[0], message: friendMessages[0], size: { width: friendSize, height: friendSize } },
-        { x: friendPositions[1].x, y: friendPositions[1].y, collected: false, img: friendImgs[1], message: friendMessages[1], size: { width: friendSize, height: friendSize } },
-        { x: friendPositions[2].x, y: friendPositions[2].y, collected: false, img: friendImgs[2], message: friendMessages[2], size: { width: friendSize, height: friendSize } }
+        { x: friendPositions[0].x, y: friendPositions[0].y, collected: false, img: friendImgs[0], size: { width: friendSize, height: friendSize } },
+        { x: friendPositions[1].x, y: friendPositions[1].y, collected: false, img: friendImgs[1], size: { width: friendSize, height: friendSize } },
+        { x: friendPositions[2].x, y: friendPositions[2].y, collected: false, img: friendImgs[2], size: { width: friendSize, height: friendSize } }
     ];
 }
 
@@ -237,43 +244,54 @@ function showFriendMessage() {
 
 function drawFriendMessage() {
     background(255);
-    textSize(24);
-    textAlign(CENTER, CENTER);
-    strokeWeight(0);
+    imageMode(CENTER);
+    let img = friendMessageImgs[currentMessageIndex];
     
-    if (currentMessageIndex === 0) {
-        fill(231, 148, 96);
-    } else if (currentMessageIndex === 1) {
-        fill(0, 92, 175);
-    } else if (currentMessageIndex === 2) {
-        fill(0, 170, 144);
-    }
+    image(img, width / 2, height / 2);
 
-    text(friends[currentMessageIndex].message, width / 2, height / 2);
+    closeButton.position(width - 70, 20);
+    closeButton.show();
 }
-
 
 function hideInputsAndButtons() {
     input1.hide();
     input2.hide();
     startButton.hide();
+    nextButton.hide();
+    closeButton.hide();
+    testButton.hide(); // Hide Test button
+    continueButton.hide(); // Hide Continue button
 }
 
 function drawEndPage() {
     background(255);
     imageMode(CENTER);
     image(endImg, width / 2, height / 2); // Draw the end image
-    closeButton.hide(); // Hide the Close button
-    testButton.position(10, 10); // Position the Test button at the top left
-    testButton.show();
-    testButton.mousePressed(() => {
-        window.location.href ='https://xiaotian0722.github.io/ANT-end/'; // Open the test
+    
+    testButton.hide(); // Hide the Test button
+
+    continueButton.position(width / 2 - 50, height / 2 + endImg.height / 2 + 20); // Position the continue button
+    continueButton.show();
+    continueButton.mousePressed(() => {
+        currentPage = 5; // Switch to the new page
+        showNewPage();
     });
 }
 
+function showNewPage() {
+    continueButton.hide();
+    testButton.position(width / 2 - 50, height / 2 + 50); // Position the Next button at the center of new page
+    testButton.show();
+}
+
+function drawThankYouPage() {
+    textSize(24);
+    textAlign(CENTER, CENTER);
+    text("Thanks for playing the whole game. Now please click Next to conduct the second test.", width / 2, height / 2 - 50);
+}
+
 function drawRiver() {
-    noStroke();
-    fill(88, 178, 220);
+    fill(135, 206, 235);
     beginShape();
     vertex(0, 120);
     vertex(150, 20);
