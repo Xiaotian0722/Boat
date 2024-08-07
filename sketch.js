@@ -5,7 +5,7 @@ let endImg;
 let friends = [];
 let friendImgs = [];
 let currentMessageIndex = -1;
-let friendSize = 75;
+let friendSize = 100;
 let friendPositions = [
     { x: 200, y: 50 },
     { x: 800, y: 400 },
