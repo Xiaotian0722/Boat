@@ -9,7 +9,7 @@ let currentMessageIndex = -1;
 let friendSize = 100;
 let friendPositions = [
     { x: 200, y: 50 },
-    { x: 800, y: 460 },
+    { x: 800, y: 480 },
     { x: 1200, y: 200 }
 ];
 
@@ -116,7 +116,7 @@ function resetGame() {
 function drawGamePage() {
     drawRiver();
     textSize(32);
-    fill(255);
+    // fill(255);
     // stroke(208, 16, 76);
     text('End', width - 50, 200);
     image(boatImg, boatX, boatY, 40, 30);
@@ -246,7 +246,7 @@ function drawFriendMessage() {
     imageMode(CENTER);
     let img = friendMessageImgs[currentMessageIndex];
     
-    image(img, width / 2, height / 2, 800, 450);
+    image(img, width / 2, height / 2, 1120, 630);
 
     closeButton.position(width - 70, 20);
     closeButton.show();
@@ -265,11 +265,12 @@ function hideInputsAndButtons() {
 function drawEndPage() {
     background(255);
     imageMode(CENTER);
-    image(endImg, width / 2, height / 2); // Draw the end image
+    image(endImg, width / 2, height / 2, 1080, 1080); // Draw the end image
     
     testButton.hide(); // Hide the Test button
+    closeButton.hide();
 
-    continueButton.position(width / 2 - 50, height / 2 + endImg.height / 2 + 20); // Position the continue button
+    continueButton.position(width / 2 - 50, height - 100); // Position the continue button
     continueButton.show();
     continueButton.mousePressed(() => {
         currentPage = 5; // Switch to the new page
@@ -279,6 +280,7 @@ function drawEndPage() {
 
 function showNewPage() {
     continueButton.hide();
+    closeButton.hide();
     testButton.position(width / 2 - 50, height / 2 + 50); // Position the Next button at the center of new page
     testButton.show();
 }
