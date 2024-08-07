@@ -283,9 +283,7 @@ function showNewPage() {
     closeButton.hide();
     testButton.position(width / 2 - 50, height / 2 + 50); // Position the Next button at the center of new page
     testButton.show();
-    testButton.mousePressed(() => {
-      window.location.href ='https://xiaotian0722.github.io/ANT-end/';
-    });
+    testButton.mousePressed(() => window.location.href = 'https://xiaotian0722.github.io/ANT-end/');
 }
 
 function drawThankYouPage() {
