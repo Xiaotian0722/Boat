@@ -8,7 +8,7 @@ let currentMessageIndex = -1;
 let friendSize = 75;
 let friendPositions = [
     { x: 200, y: 50 },
-    { x: 800, y: 450 },
+    { x: 800, y: 400 },
     { x: 1200, y: 200 }
 ];
 
