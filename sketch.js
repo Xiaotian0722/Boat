@@ -5,7 +5,7 @@ let endImg;
 let friends = [];
 let friendImgs = [];
 let currentMessageIndex = -1;
-let friendSize = 50;
+let friendSize = 75;
 let friendPositions = [
     { x: 200, y: 50 },
     { x: 800, y: 500 },
@@ -100,7 +100,7 @@ function resetGame() {
     boatX = 0;
     boatY = 130; 
     friends = [
-        { x: friendPositions[0].x, y: friendPositions[0].y, collected: false, img: friendImgs[0], message: friendMessages[0], size: { width: 35, height: 70 } }, // First friend with different size
+        { x: friendPositions[0].x, y: friendPositions[0].y, collected: false, img: friendImgs[0], message: friendMessages[0], size: { width: friendSize, height: friendSize } },
         { x: friendPositions[1].x, y: friendPositions[1].y, collected: false, img: friendImgs[1], message: friendMessages[1], size: { width: friendSize, height: friendSize } },
         { x: friendPositions[2].x, y: friendPositions[2].y, collected: false, img: friendImgs[2], message: friendMessages[2], size: { width: friendSize, height: friendSize } }
     ];
