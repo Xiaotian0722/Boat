@@ -117,7 +117,7 @@ function drawGamePage() {
     drawRiver();
     textSize(32);
     fill(255);
-    stroke(208, 16, 76);
+    // stroke(208, 16, 76);
     text('End', width - 50, 200);
     image(boatImg, boatX, boatY, 40, 30);
     for (let i = 0; i < friends.length; i++) {
@@ -246,7 +246,7 @@ function drawFriendMessage() {
     imageMode(CENTER);
     let img = friendMessageImgs[currentMessageIndex];
     
-    image(img, width / 2, height / 2, 1280, 720);
+    image(img, width / 2, height / 2, 800, 450);
 
     closeButton.position(width - 70, 20);
     closeButton.show();
